@@ -1,0 +1,29 @@
+<resources>
+
+  <string name="action_settings">Settings</string>
+  <!-- Strings used for fragments for navigation -->
+  <string name="simulation_label">@string/app_name</string>
+  <string name="settings_label">Settings</string>
+
+  <string name="action_reset">Reset</string>
+  <string name="action_play_once">Simulate one batch of rounds</string>
+  <string name="action_play_fast">Simulate rounds until pause</string>
+  <string name="action_pause">Pause simulation</string>
+
+  <string name="summary_format">%1$,d wins / %2$,d rounds = %3$.2f%%</string>
+  <string name="error_message_format">Error: %s</string>
+
+  <string name="play_once_pref_key">play_once_count</string>
+  <string name="play_once_pref_title">Rounds per batch</string>
+  <string name="play_once_pref_summary">Simulate %1$,d %2$s in each batch.</string>
+
+  <string name="play_fast_pref_key">play_fast_count</string>
+  <string name="play_fast_pref_title">Rounds between updates</string>
+  <string name="play_fast_pref_summary">Simulate %1$,d %2$s between display updates in fast mode.</string>
+
+  <plurals name="round_quantity">
+    <item quantity="one">round</item>
+    <item quantity="other">rounds</item>
+  </plurals>
+
+</resources>

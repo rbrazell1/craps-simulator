@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <SeekBarPreference
+    android:key="@string/play_once_pref_key"
+    android:title="@string/play_once_pref_title"
+    android:summary="@string/play_once_pref_summary"
+    app:min="@integer/play_once_pref_min"
+    android:max="@integer/play_once_pref_max"
+    android:defaultValue="@integer/play_once_pref_default"/>
+
+  <SeekBarPreference
+    android:key="@string/play_fast_pref_key"
+    android:title="@string/play_fast_pref_title"
+    android:summary="@string/play_fast_pref_summary"
+    app:min="@integer/play_fast_pref_min"
+    android:max="@integer/play_fast_pref_max"
+    android:defaultValue="@integer/play_fast_pref_default"/>
+
+</PreferenceScreen>

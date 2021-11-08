@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <integer name="play_once_pref_min">0</integer>
+  <integer name="play_once_pref_max">5</integer>
+  <integer name="play_once_pref_default">2</integer>
+
+  <integer name="play_fast_pref_min">0</integer>
+  <integer name="play_fast_pref_max">5</integer>
+  <integer name="play_fast_pref_default">3</integer>
+
+</resources>

@@ -1,0 +1,40 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context="edu.cnm.deepdive.crapssimulator.controller.MainActivity"
+  tools:ignore="AlwaysShowAction">
+
+  <item
+    android:id="@+id/action_play_once"
+    android:title="@string/action_play_once"
+    android:icon="@drawable/ic_skip_next_black_24dp"
+    app:iconTint="?attr/colorOnPrimary"
+    app:showAsAction="always"/>
+
+  <item
+    android:id="@+id/action_play_fast"
+    android:title="@string/action_play_fast"
+    android:icon="@drawable/ic_fast_forward_black_24dp"
+    app:iconTint="?attr/colorOnPrimary"
+    app:showAsAction="always"/>
+
+  <item
+    android:id="@+id/action_pause"
+    android:title="@string/action_pause"
+    android:icon="@drawable/ic_pause_black_24dp"
+    app:iconTint="?attr/colorOnPrimary"
+    android:visible="false"
+    app:showAsAction="always"/>
+
+  <item
+    android:id="@+id/action_reset"
+    android:title="@string/action_reset"
+    app:showAsAction="never"/>
+
+  <item
+    android:id="@+id/action_settings"
+    android:orderInCategory="100"
+    android:title="@string/action_settings"
+    app:showAsAction="never"/>
+
+</menu>
