@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.crapssimulator.model.Snapshot;
 import edu.cnm.deepdive.crapssimulator.service.CrapsRepository;
 import edu.cnm.deepdive.crapssimulator.service.SettingsRepository;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycleObserver {
@@ -22,9 +23,9 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
   private final MutableLiveData<Boolean> running;
   private final MutableLiveData<Boolean> finishing;
   private final MutableLiveData<Throwable> throwable;
+  private final CompositeDisposable pending;
 
   private int batchSize;
-  private int updateSize;
   private Disposable simulation;
 
   public CrapsViewModel(@NonNull Application application) {
@@ -35,14 +36,16 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
     running = new MutableLiveData<>(false);
     finishing = new MutableLiveData<>(false);
     throwable = new MutableLiveData<>();
+    pending = new CompositeDisposable();
     subscribeToPreferences();
+    subscribeToSnapshots();
   }
 
   public LiveData<Snapshot> getSnapshot() {
     return snapshot;
   }
 
-  public MutableLiveData<Boolean> getRunning() {
+  public LiveData<Boolean> getRunning() {
     return running;
   }
 
@@ -54,40 +57,21 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
     return throwable;
   }
 
-  public void simulateFast() {
-    running.postValue(true);
-    simulation = crapsRepository
-        .simulateFast(updateSize)
-        .subscribe(
-            this.snapshot::postValue,
-            this::postThrowable
-        );
+  public void runFast() {
+    running.setValue(true);
+    crapsRepository.runFast(batchSize);
   }
 
-  public void simulateBatch() {
-    simulation = crapsRepository
-        .simulateBatch(batchSize)
-        .subscribe(
-            this.snapshot::postValue,
-            this::postThrowable
-        );
+  public void runOnce() {
+    crapsRepository.runOnce(batchSize);
   }
 
-  @SuppressLint("CheckResult")
   public void stop() {
-    finishing.postValue(true);
-    if (simulation != null) {
-      simulation.dispose();
-      simulation = null;
-    }
-    //noinspection ResultOfMethodCallIgnored
-    crapsRepository
-        .getSnapshot()
-        .subscribe(this::finishSimulation);
+    crapsRepository.stop();
+    running.postValue(false);
   }
 
   public void reset() {
-    stop();
     crapsRepository.reset();
     snapshot.setValue(new Snapshot());
   }
@@ -96,27 +80,29 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
   public void onStop(@NonNull LifecycleOwner owner) {
     DefaultLifecycleObserver.super.onStop(owner);
     stop();
+    pending.clear();
   }
 
-  @SuppressLint("CheckResult")
   private void subscribeToPreferences() {
-    //noinspection ResultOfMethodCallIgnored
-    settingsRepository
-        .getPlayOncePreference()
-        .subscribe((batchSize) -> this.batchSize = batchSize);
-    //noinspection ResultOfMethodCallIgnored
-    settingsRepository
-        .getPlayFastPreference()
-        .subscribe((updateSize) -> this.updateSize = updateSize);
+    pending.add(
+        settingsRepository
+            .getBatchSizePreference()
+            .subscribe(
+                (batchSize) -> this.batchSize = batchSize,
+                this::postThrowable
+            )
+    );
   }
 
-  private void finishSimulation(Snapshot snapshot) {
-    this.snapshot.postValue(snapshot);
-    //noinspection ConstantConditions
-    if (running.getValue()) {
-      running.postValue(false);
-    }
-    finishing.postValue(false);
+  private void subscribeToSnapshots() {
+    pending.add(
+        crapsRepository
+            .snapshots()
+            .subscribe(
+                snapshot::postValue,
+                this::postThrowable
+            )
+    );
   }
 
   private void postThrowable(Throwable throwable) {

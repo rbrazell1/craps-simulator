@@ -13,13 +13,9 @@
   <string name="summary_format">%1$,d wins / %2$,d rounds = %3$.2f%%</string>
   <string name="error_message_format">Error: %s</string>
 
-  <string name="play_once_pref_key">play_once_count</string>
-  <string name="play_once_pref_title">Rounds per batch</string>
-  <string name="play_once_pref_summary">Simulate %1$,d %2$s in each batch.</string>
-
-  <string name="play_fast_pref_key">play_fast_count</string>
-  <string name="play_fast_pref_title">Rounds between updates</string>
-  <string name="play_fast_pref_summary">Simulate %1$,d %2$s between display updates in fast mode.</string>
+  <string name="batch_size_pref_key">play_once_count</string>
+  <string name="batch_size_pref_title">Rounds per batch</string>
+  <string name="batch_size_pref_summary">Simulate %1$,d %2$s in a single batch, or between updates in fast mode.</string>
 
   <plurals name="round_quantity">
     <item quantity="one">round</item>

@@ -12,53 +12,35 @@ import io.reactivex.ObservableEmitter;
 public class SettingsRepository {
 
   private final SharedPreferences preferences;
-  private final String playOncePrefKey;
-  private final String playFastPrefKey;
-  private final int playOncePrefDefault;
-  private final int playFastPrefDefault;
+  private final String batchSizePrefKey;
+  private final int batchSizePrefDefault;
   @SuppressWarnings("FieldCanBeLocal")
   private final OnSharedPreferenceChangeListener listener;
 
-  private ObservableEmitter<Integer> playOncePrefEmitter;
-  private ObservableEmitter<Integer> playFastPrefEmitter;
+  private ObservableEmitter<Integer> batchSizePrefEmitter;
 
   public SettingsRepository(Context context) {
     Resources resources = context.getResources();
-    playOncePrefKey = resources.getString(R.string.play_once_pref_key);
-    playFastPrefKey = resources.getString(R.string.play_fast_pref_key);
-    playOncePrefDefault = resources.getInteger(R.integer.play_once_pref_default);
-    playFastPrefDefault = resources.getInteger(R.integer.play_fast_pref_default);
+    batchSizePrefKey = resources.getString(R.string.batch_size_pref_key);
+    batchSizePrefDefault = resources.getInteger(R.integer.batch_size_pref_default);
     listener = this::emitChangedPreference;
     preferences = PreferenceManager.getDefaultSharedPreferences(context);
     preferences.registerOnSharedPreferenceChangeListener(listener);
   }
 
-  public Observable<Integer> getPlayOncePreference() {
+  public Observable<Integer> getBatchSizePreference() {
     return Observable.create((emitter) -> {
-      playOncePrefEmitter = emitter;
-      emitChangedPreference(preferences, playOncePrefKey);
-    });
-  }
-
-  public Observable<Integer> getPlayFastPreference() {
-    return Observable.create((emitter) -> {
-      playFastPrefEmitter = emitter;
-      emitChangedPreference(preferences, playFastPrefKey);
+      batchSizePrefEmitter = emitter;
+      emitChangedPreference(preferences, batchSizePrefKey);
     });
   }
 
   private void emitChangedPreference(SharedPreferences prefs, String key) {
-    if (key.equals(playOncePrefKey)) {
-      if (playOncePrefEmitter != null && !playOncePrefEmitter.isDisposed()) {
+    if (key.equals(batchSizePrefKey)) {
+      if (batchSizePrefEmitter != null && !batchSizePrefEmitter.isDisposed()) {
         int count =
-            (int) Math.round(Math.pow(10, prefs.getInt(playOncePrefKey, playOncePrefDefault)));
-        playOncePrefEmitter.onNext(count);
-      }
-    } else if (key.equals(playFastPrefKey)) {
-      if (playFastPrefEmitter != null && !playFastPrefEmitter.isDisposed()) {
-        int count =
-            (int) Math.round(Math.pow(10, prefs.getInt(playFastPrefKey, playFastPrefDefault)));
-        playFastPrefEmitter.onNext(count);
+            (int) Math.round(Math.pow(10, prefs.getInt(batchSizePrefKey, batchSizePrefDefault)));
+        batchSizePrefEmitter.onNext(count);
       }
     }
   }

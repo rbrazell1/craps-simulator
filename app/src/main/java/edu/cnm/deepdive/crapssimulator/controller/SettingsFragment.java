@@ -11,8 +11,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     setPreferencesFromResource(R.xml.preferences, rootKey);
-    setupSeekBar(R.string.play_once_pref_key, R.string.play_once_pref_summary);
-    setupSeekBar(R.string.play_fast_pref_key, R.string.play_fast_pref_summary);
+    setupSeekBar(R.string.batch_size_pref_key, R.string.batch_size_pref_summary);
   }
 
   private void setupSeekBar(int keyResId, int summaryResId) {

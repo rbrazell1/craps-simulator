@@ -3,19 +3,11 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <SeekBarPreference
-    android:key="@string/play_once_pref_key"
-    android:title="@string/play_once_pref_title"
-    android:summary="@string/play_once_pref_summary"
-    app:min="@integer/play_once_pref_min"
-    android:max="@integer/play_once_pref_max"
-    android:defaultValue="@integer/play_once_pref_default"/>
-
-  <SeekBarPreference
-    android:key="@string/play_fast_pref_key"
-    android:title="@string/play_fast_pref_title"
-    android:summary="@string/play_fast_pref_summary"
-    app:min="@integer/play_fast_pref_min"
-    android:max="@integer/play_fast_pref_max"
-    android:defaultValue="@integer/play_fast_pref_default"/>
+    android:key="@string/batch_size_pref_key"
+    android:title="@string/batch_size_pref_title"
+    android:summary="@string/batch_size_pref_summary"
+    app:min="@integer/batch_size_pref_min"
+    android:max="@integer/batch_size_pref_max"
+    android:defaultValue="@integer/batch_size_pref_default"/>
 
 </PreferenceScreen>

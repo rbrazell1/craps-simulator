@@ -66,6 +66,7 @@ public class CrapsFragment extends Fragment {
     menu.findItem(R.id.action_play_once).setVisible(!running);
     menu.findItem(R.id.action_play_fast).setVisible(!running);
     menu.findItem(R.id.action_pause).setVisible(running);
+    menu.findItem(R.id.action_reset).setVisible(!running);
   }
 
   @Override
@@ -109,8 +110,8 @@ public class CrapsFragment extends Fragment {
 
   private void buildMenuActionsMap() {
     actions.clear();
-    actions.put(R.id.action_play_once, viewModel::simulateBatch);
-    actions.put(R.id.action_play_fast, viewModel::simulateFast);
+    actions.put(R.id.action_play_once, viewModel::runOnce);
+    actions.put(R.id.action_play_fast, viewModel::runFast);
     actions.put(R.id.action_pause, viewModel::stop);
     actions.put(R.id.action_reset, viewModel::reset);
     actions.put(R.id.action_settings, this::openSettings);
