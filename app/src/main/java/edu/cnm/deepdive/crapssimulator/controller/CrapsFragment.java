@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.crapssimulator.controller;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +45,7 @@ public class CrapsFragment extends Fragment {
 
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    Log.d(getClass().getSimpleName(), "View created");
     viewModel = new ViewModelProvider(this).get(CrapsViewModel.class);
     getLifecycle().addObserver(viewModel);
     LifecycleOwner owner = getViewLifecycleOwner();

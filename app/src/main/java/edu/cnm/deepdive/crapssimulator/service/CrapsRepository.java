@@ -10,16 +10,22 @@ import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Random;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import org.apache.commons.rng.simple.JDKRandomBridge;
 import org.apache.commons.rng.simple.RandomSource;
 
 public class CrapsRepository {
 
   private static final int DEFAULT_ROUNDS_PER_SNAPSHOT = 1_000;
+  private static final long SLEEP_INTERVAL = 100;
 
   private final Scheduler scheduler;
   private final Round round;
 
+  private ScheduledExecutorService executor;
+  private ScheduledFuture<?> future;
   private long wins;
   private long losses;
   private int roundsPerSnapshot;
@@ -28,7 +34,7 @@ public class CrapsRepository {
 
   public CrapsRepository() {
     Random rng = new JDKRandomBridge(RandomSource.XO_RO_SHI_RO_128_PP, null);
-    scheduler = Schedulers.from(Executors.newSingleThreadExecutor());
+    scheduler = Schedulers.single();
     round = new Round(rng);
     roundsPerSnapshot = DEFAULT_ROUNDS_PER_SNAPSHOT;
   }
@@ -40,20 +46,25 @@ public class CrapsRepository {
     losses = 0;
   }
 
-  public Flowable<Snapshot> snapshots() {
+  public Flowable<Snapshot> getSnapshots() {
     return Flowable
         .create((FlowableEmitter<Snapshot> emitter) -> {
-          while (!emitter.isCancelled()) {
-            while (runningFast) {
-              play(roundsPerSnapshot);
-              emitter.onNext(new Snapshot(round, wins, losses));
+          executor = Executors.newSingleThreadScheduledExecutor();
+          future = executor.scheduleWithFixedDelay(() -> {
+            if (!emitter.isCancelled()) {
+              while (runningFast) {
+                play(roundsPerSnapshot);
+                emitter.onNext(new Snapshot(round, wins, losses));
+              }
+              if (runningOnce) {
+                runningOnce = false;
+                play(roundsPerSnapshot);
+                emitter.onNext(new Snapshot(round, wins, losses));
+              }
+            } else {
+              future.cancel(true);
             }
-            if (runningOnce) {
-              runningOnce = false;
-              play(roundsPerSnapshot);
-              emitter.onNext(new Snapshot(round, wins, losses));
-            }
-          }
+          }, 0, SLEEP_INTERVAL, TimeUnit.MILLISECONDS);
         }, BackpressureStrategy.LATEST)
         .subscribeOn(scheduler);
   }

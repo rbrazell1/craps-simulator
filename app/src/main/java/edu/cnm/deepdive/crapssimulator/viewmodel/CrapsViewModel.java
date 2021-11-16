@@ -6,14 +6,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.DefaultLifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.crapssimulator.model.Snapshot;
 import edu.cnm.deepdive.crapssimulator.service.CrapsRepository;
 import edu.cnm.deepdive.crapssimulator.service.SettingsRepository;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycleObserver {
 
@@ -26,7 +24,6 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
   private final CompositeDisposable pending;
 
   private int batchSize;
-  private Disposable simulation;
 
   public CrapsViewModel(@NonNull Application application) {
     super(application);
@@ -76,33 +73,26 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
     snapshot.setValue(new Snapshot());
   }
 
-  @Override
-  public void onStop(@NonNull LifecycleOwner owner) {
-    DefaultLifecycleObserver.super.onStop(owner);
-    stop();
-    pending.clear();
-  }
-
+  @SuppressLint("CheckResult")
   private void subscribeToPreferences() {
-    pending.add(
-        settingsRepository
-            .getBatchSizePreference()
-            .subscribe(
-                (batchSize) -> this.batchSize = batchSize,
-                this::postThrowable
-            )
-    );
+    //noinspection ResultOfMethodCallIgnored
+    settingsRepository
+        .getBatchSizePreference()
+        .subscribe(
+            (batchSize) -> this.batchSize = batchSize,
+            this::postThrowable
+        );
   }
 
+  @SuppressLint("CheckResult")
   private void subscribeToSnapshots() {
-    pending.add(
-        crapsRepository
-            .snapshots()
-            .subscribe(
-                snapshot::postValue,
-                this::postThrowable
-            )
-    );
+    //noinspection ResultOfMethodCallIgnored
+    crapsRepository
+        .getSnapshots()
+        .subscribe(
+            snapshot::postValue,
+            this::postThrowable
+        );
   }
 
   private void postThrowable(Throwable throwable) {
