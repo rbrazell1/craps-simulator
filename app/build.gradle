@@ -107,7 +107,7 @@ android.applicationVariants.all { variant ->
 
     def task = project.tasks.create("generate${variant.name.capitalize()}Javadoc", Javadoc) {
 
-        title "$appName (${project.android.defaultConfig.versionName})"
+        title "$appName ${project.android.defaultConfig.versionName}"
         group "ApiDoc"
         description "Generates Javadoc for $variant.name."
 
@@ -132,12 +132,13 @@ android.applicationVariants.all { variant ->
 
         //noinspection GroovyAssignabilityCheck
         options {
-            windowTitle = "$appName (${project.android.defaultConfig.versionName})"
+            windowTitle = "$appName ${project.android.defaultConfig.versionName}"
             memberLevel = JavadocMemberLevel.PROTECTED
             linkSource = false
             author = false
-            links 'https://docs.oracle.com/javase/8/docs/api/'
+            links 'https://docs.oracle.com/en/java/javase/11/docs/api/'
             linksOffline 'https://developer.android.com/reference', "$projectDir/.."
+            links 'https://reactivex.io/RxJava/3.x/javadoc/'
         }
 
         if (JavaVersion.current().isJava8Compatible()) {

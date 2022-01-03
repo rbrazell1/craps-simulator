@@ -15,6 +15,7 @@
  */
 package edu.cnm.deepdive.crapssimulator.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class Round {
   }
 
   /**
-   * Returns the {@link List List&lt;Roll&gt;} rolled so far in this instance.
+   * Returns a copy of the {@link List List&lt;Roll&gt;} rolled so far in this instance.
    *
    * @return {@link List List&lt;Roll&gt;}
    */

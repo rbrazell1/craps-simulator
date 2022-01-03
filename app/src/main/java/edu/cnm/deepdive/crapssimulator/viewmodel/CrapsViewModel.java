@@ -143,9 +143,8 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
     pending.add(
         crapsRepository
             .getSnapshots()
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                snapshot::setValue,
+                snapshot::postValue,
                 this::postThrowable
             )
     );

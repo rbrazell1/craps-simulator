@@ -72,13 +72,13 @@ public class CrapsRepository {
 
   /**
    * Triggers publication of simulation {@link Snapshot} data as a {@link Flowable}&lt;{@link
-   * Snapshot}&gt. Note that this is a "cold" source: no data is published unless there is a
+   * Snapshot}&gt;. Note that this is a "cold" source: no data is published unless there is a
    * subscriber; in fact, the simulation will not run at all without a subscriber.
    * <p>A maximum of 128 snapshots (by default) will be buffered: If a subscriber is not able to
    * consume simulation snapshots as fast as they are published, older snapshots will be discarded
    * when the number of unconsumed snapshots exceeds this buffer size.</p>
    *
-   * @return {@link Flowable}&lt;{@link Snapshot}&gt.
+   * @return {@link Flowable}&lt;{@link Snapshot}&gt;
    */
   public Flowable<Snapshot> getSnapshots() {
     return Flowable

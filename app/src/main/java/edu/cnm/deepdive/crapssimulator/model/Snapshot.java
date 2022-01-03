@@ -16,6 +16,7 @@
 package edu.cnm.deepdive.crapssimulator.model;
 
 import edu.cnm.deepdive.crapssimulator.model.Round.State;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public final class Snapshot {
    * @param losses Tally of losses.
    */
   public Snapshot(Round round, long wins, long losses) {
-    rolls = round.getRolls();
+    rolls = new ArrayList<>(round.getRolls());
     this.wins = wins;
     this.losses = losses;
     state = round.getState();

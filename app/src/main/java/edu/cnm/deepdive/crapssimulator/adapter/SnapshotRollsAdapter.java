@@ -29,12 +29,14 @@ import edu.cnm.deepdive.crapssimulator.adapter.SnapshotRollsAdapter.Holder;
 import edu.cnm.deepdive.crapssimulator.databinding.ItemRollBinding;
 import edu.cnm.deepdive.crapssimulator.model.Roll;
 import edu.cnm.deepdive.crapssimulator.model.Snapshot;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 /**
- *
+ * Adapts a {@link Snapshot} for use in a {@link RecyclerView}. Each {@link Roll} in {@link
+ * Snapshot#getRolls()} is displayed as an item in the list, using vector drawable resources to
+ * present the dice faces. The entire list is given a semi-transparent background color
+ * corresponding to the outcome: red for a loss, green for a win.
  */
 public class SnapshotRollsAdapter extends RecyclerView.Adapter<Holder> {
 
@@ -53,14 +55,16 @@ public class SnapshotRollsAdapter extends RecyclerView.Adapter<Holder> {
   @ColorInt private final int winColor;
   @ColorInt private final int lossColor;
   private final List<Roll> rolls;
-
-  private boolean win;
+  private final boolean win;
 
   /**
+   * Initializes this instance with the specified app {@link Context} and the {@link Snapshot} to be
+   * adapted for display.
    *
-   * @param context
+   * @param context App context.
+   * @param snapshot {@link Snapshot} to adapt.
    */
-  public SnapshotRollsAdapter(Context context) {
+  public SnapshotRollsAdapter(Context context, Snapshot snapshot) {
     inflater = LayoutInflater.from(context);
     faces = IntStream
         .of(faceResources)
@@ -68,7 +72,8 @@ public class SnapshotRollsAdapter extends RecyclerView.Adapter<Holder> {
         .toArray(Drawable[]::new);
     winColor = ContextCompat.getColor(context, R.color.win_color);
     lossColor = ContextCompat.getColor(context, R.color.loss_color);
-    rolls = new ArrayList<>();
+    rolls = snapshot.getRolls();
+    win = snapshot.isWin();
   }
 
   @NonNull
@@ -85,17 +90,6 @@ public class SnapshotRollsAdapter extends RecyclerView.Adapter<Holder> {
   @Override
   public int getItemCount() {
     return rolls.size();
-  }
-
-  /**
-   *
-   * @param snapshot
-   */
-  public void setSnapshot(Snapshot snapshot) {
-    win = snapshot.isWin();
-    rolls.clear();
-    rolls.addAll(snapshot.getRolls());
-    notifyDataSetChanged();
   }
 
   class Holder extends RecyclerView.ViewHolder {

@@ -49,7 +49,6 @@ public class CrapsFragment extends Fragment {
   private FragmentCrapsBinding binding;
   private CrapsViewModel viewModel;
   private boolean running;
-  private SnapshotRollsAdapter adapter;
   private String summaryFormat;
   private String errorMessageFormat;
 
@@ -63,8 +62,6 @@ public class CrapsFragment extends Fragment {
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentCrapsBinding.inflate(inflater, container, false);
-    adapter = new SnapshotRollsAdapter(getContext());
-    binding.rolls.setAdapter(adapter);
     summaryFormat = getString(R.string.summary_format);
     errorMessageFormat = getString(R.string.error_message_format);
     return binding.getRoot();
@@ -122,7 +119,8 @@ public class CrapsFragment extends Fragment {
     long rounds = snapshot.getRounds();
     double winningPercentage = (rounds > 0) ? (100.0 * wins / rounds) : 0;
     binding.summary.setText(String.format(summaryFormat, wins, rounds, winningPercentage));
-    adapter.setSnapshot(snapshot);
+    SnapshotRollsAdapter adapter = new SnapshotRollsAdapter(getContext(), snapshot);
+    binding.rolls.setAdapter(adapter);
   }
 
   private void displayError(Throwable throwable) {
