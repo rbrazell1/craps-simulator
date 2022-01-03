@@ -16,6 +16,8 @@
   <string name="batch_size_pref_key">play_once_count</string>
   <string name="batch_size_pref_title">Rounds per batch</string>
   <string name="batch_size_pref_summary">Simulate %1$,d %2$s in a single batch, or between updates in fast mode.</string>
+  <string name="die_1">Die 1</string>
+  <string name="die_2">Die 2</string>
 
   <plurals name="round_quantity">
     <item quantity="one">round</item>
