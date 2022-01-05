@@ -29,7 +29,6 @@ import androidx.preference.PreferenceManager;
 import edu.cnm.deepdive.crapssimulator.R;
 import edu.cnm.deepdive.crapssimulator.model.Snapshot;
 import edu.cnm.deepdive.crapssimulator.service.CrapsRepository;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
@@ -46,6 +45,7 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
   private final SharedPreferences preferences;
   private final String batchSizePrefKey;
   private final int batchSizePrefDefault;
+
 
   /**
    * Initializes this instance with the specified {@link Application} as a context.
@@ -135,8 +135,8 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
 
   @Override
   public void onStop(@NonNull LifecycleOwner owner) {
-    DefaultLifecycleObserver.super.onStop(owner);
     pending.clear();
+    DefaultLifecycleObserver.super.onStop(owner);
   }
 
   private void subscribeToSnapshots() {

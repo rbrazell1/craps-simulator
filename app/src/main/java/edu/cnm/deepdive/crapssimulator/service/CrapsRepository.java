@@ -21,7 +21,6 @@ import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.FlowableEmitter;
 import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -86,7 +85,7 @@ public class CrapsRepository {
           executor = Executors.newSingleThreadScheduledExecutor();
           future = executor.scheduleWithFixedDelay(() -> {
             if (!emitter.isCancelled()) {
-              while (runningFast) {
+              while (!emitter.isCancelled() && runningFast) {
                 play(roundsPerSnapshot);
                 emitter.onNext(new Snapshot(round, wins, losses));
               }

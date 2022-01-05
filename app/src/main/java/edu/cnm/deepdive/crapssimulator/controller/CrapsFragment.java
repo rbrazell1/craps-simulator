@@ -75,7 +75,7 @@ public class CrapsFragment extends Fragment {
     LifecycleOwner owner = getViewLifecycleOwner();
     viewModel.getSnapshot().observe(owner, this::updateDisplay);
     viewModel.getRunning().observe(owner, this::setRunning);
-    viewModel.getThrowable().observe(owner, this::displayError);
+    viewModel.getThrowable().observe(owner, this::showError);
     buildMenuActionsMap();
   }
 
@@ -96,16 +96,12 @@ public class CrapsFragment extends Fragment {
 
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    int itemId = item.getItemId();
-    Runnable action = actions.get(itemId);
-    boolean handled;
-    if (action != null) {
-      action.run();
-      handled = true;
-    } else {
-      handled = super.onOptionsItemSelected(item);
-    }
-    return handled;
+    boolean[] handled = {true};
+    //noinspection ConstantConditions
+    actions
+        .getOrDefault(item.getItemId(), () -> handled[0] = super.onOptionsItemSelected(item))
+        .run();
+    return handled[0];
   }
 
   @Override
@@ -123,7 +119,7 @@ public class CrapsFragment extends Fragment {
     binding.rolls.setAdapter(adapter);
   }
 
-  private void displayError(Throwable throwable) {
+  private void showError(Throwable throwable) {
     Snackbar
         .make(binding.getRoot(), String.format(errorMessageFormat, throwable.getMessage()),
             Snackbar.LENGTH_LONG)
