@@ -94,7 +94,7 @@ public class SnapshotRollsAdapter extends RecyclerView.Adapter<Holder> {
 
   class Holder extends RecyclerView.ViewHolder {
 
-    private ItemRollBinding binding;
+    private final ItemRollBinding binding;
 
     private Holder(@NonNull ItemRollBinding binding) {
       super(binding.getRoot());
