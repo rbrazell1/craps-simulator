@@ -128,15 +128,15 @@ public class CrapsViewModel extends AndroidViewModel implements DefaultLifecycle
   }
 
   @Override
-  public void onStart(@NonNull LifecycleOwner owner) {
-    DefaultLifecycleObserver.super.onStart(owner);
+  public void onResume(@NonNull LifecycleOwner owner) {
+    DefaultLifecycleObserver.super.onResume(owner);
     subscribeToSnapshots();
   }
 
   @Override
-  public void onStop(@NonNull LifecycleOwner owner) {
+  public void onPause(@NonNull LifecycleOwner owner) {
     pending.clear();
-    DefaultLifecycleObserver.super.onStop(owner);
+    DefaultLifecycleObserver.super.onPause(owner);
   }
 
   private void subscribeToSnapshots() {
