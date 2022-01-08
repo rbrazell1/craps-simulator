@@ -15,6 +15,7 @@
  */
 package edu.cnm.deepdive.crapssimulator.controller;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -114,8 +115,9 @@ public class CrapsFragment extends Fragment {
     long wins = snapshot.getWins();
     long rounds = snapshot.getRounds();
     double winningPercentage = (rounds > 0) ? (100.0 * wins / rounds) : 0;
-    String winQuantity = getResources().getQuantityString(R.plurals.win_quantity, (int) wins);
-    String roundQuantity = getResources().getQuantityString(R.plurals.round_quantity, (int) rounds);
+    Resources resources = getResources();
+    String winQuantity = resources.getQuantityString(R.plurals.win_quantity, (int) wins);
+    String roundQuantity = resources.getQuantityString(R.plurals.round_quantity, (int) rounds);
     binding.summary.setText(
         String.format(summaryFormat, wins, winQuantity, rounds, roundQuantity, winningPercentage));
     SnapshotRollsAdapter adapter = new SnapshotRollsAdapter(getContext(), snapshot);
@@ -136,7 +138,7 @@ public class CrapsFragment extends Fragment {
     actions.put(R.id.action_pause, viewModel::stop);
     actions.put(R.id.action_reset, viewModel::reset);
     actions.put(R.id.action_settings, this::openSettings);
-    actions.put(R.id.action_about, this::openLicenseInfo);
+    actions.put(R.id.action_about, this::openAbout);
   }
 
   private void setRunning(boolean running) {
@@ -151,10 +153,10 @@ public class CrapsFragment extends Fragment {
         .navigate(CrapsFragmentDirections.openSettings());
   }
 
-  private void openLicenseInfo() {
+  private void openAbout() {
     Navigation
         .findNavController(binding.getRoot())
-        .navigate(CrapsFragmentDirections.openLicense());
+        .navigate(CrapsFragmentDirections.openAbout());
   }
 
 }

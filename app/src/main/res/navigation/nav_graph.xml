@@ -18,33 +18,33 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/nav_graph"
-  app:startDestination="@id/simulation_fragment">
+  app:startDestination="@id/nav_simulation">
 
   <fragment
-    android:id="@+id/simulation_fragment"
+    android:id="@+id/nav_simulation"
     android:label="@string/simulation_label"
     android:name="edu.cnm.deepdive.crapssimulator.controller.CrapsFragment"
     tools:layout="@layout/fragment_craps">
 
     <action
       android:id="@+id/open_settings"
-      app:destination="@id/settings_fragment"
-      app:popUpTo="@id/simulation_fragment"/>
+      app:destination="@id/nav_settings"
+      app:popUpTo="@id/nav_simulation"/>
 
     <action
-      android:id="@+id/open_license"
-      app:destination="@id/license_fragment"
-      app:popUpTo="@id/simulation_fragment"/>
+      android:id="@+id/open_about"
+      app:destination="@id/nav_about"
+      app:popUpTo="@id/nav_simulation"/>
 
   </fragment>
 
   <fragment
-    android:id="@+id/settings_fragment"
+    android:id="@+id/nav_settings"
     android:label="@string/settings_label"
     android:name="edu.cnm.deepdive.crapssimulator.controller.SettingsFragment"/>
 
   <fragment
-    android:id="@+id/license_fragment"
+    android:id="@+id/nav_about"
     android:label="@string/about_label"
     android:name="edu.cnm.deepdive.crapssimulator.controller.AboutFragment"/>
 
