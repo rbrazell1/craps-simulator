@@ -114,7 +114,10 @@ public class CrapsFragment extends Fragment {
     long wins = snapshot.getWins();
     long rounds = snapshot.getRounds();
     double winningPercentage = (rounds > 0) ? (100.0 * wins / rounds) : 0;
-    binding.summary.setText(String.format(summaryFormat, wins, rounds, winningPercentage));
+    String winQuantity = getResources().getQuantityString(R.plurals.win_quantity, (int) wins);
+    String roundQuantity = getResources().getQuantityString(R.plurals.round_quantity, (int) rounds);
+    binding.summary.setText(
+        String.format(summaryFormat, wins, winQuantity, rounds, roundQuantity, winningPercentage));
     SnapshotRollsAdapter adapter = new SnapshotRollsAdapter(getContext(), snapshot);
     binding.rolls.setAdapter(adapter);
   }

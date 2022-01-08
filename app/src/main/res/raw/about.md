@@ -1,6 +1,6 @@
 This app is a simple Monte Carlo simulation of rounds of the shooter's play in the game of Craps. No wagering actions are presented or evaluated; the wins, losses, and winning percentage are simply tallied and presented, along with a snapshot of the most recent round of dice rolls.
 
-While the theoretical probability of a win for the shooter is straightforward (for a practitioner experienced in computing the sums of infinite series) to compute analytically, this app takes a different approach: it applies the _Monte Carlo method,_ simulating a large number of trials of the stochastic process of interest (in this case, the shooter's rolls of the dice) to compute an approximation of the statistic of interest.
+While it's possible to compute the exact theoretical probability of a win for the shooter, doing so requires a working understanding of probability and infinite series. This app takes a different approach: it applies the _Monte Carlo method,_ simulating a large number of trials of the stochastic process of interest (in this case, the shooter's rolls of the dice) to compute an approximation of one or more process statistics.
 
 ### Additional information
 
