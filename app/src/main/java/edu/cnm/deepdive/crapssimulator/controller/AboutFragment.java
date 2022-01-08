@@ -45,9 +45,10 @@ public class AboutFragment extends Fragment {
     Resources resources = getContext().getResources();
     try (InputStream input = resources.openRawResource(R.raw.about)) {
       String markdown = IOUtils.toString(input, Charset.defaultCharset());
-      Markwon markwon = Markwon.create(getContext());
       FragmentAboutBinding binding = FragmentAboutBinding.inflate(inflater, container, false);
-      markwon.setMarkdown(binding.getRoot(), markdown);
+      Markwon
+          .create(getContext())
+          .setMarkdown(binding.getRoot(), markdown);
       return binding.getRoot();
     } catch (IOException e) {
       throw new RuntimeException(e);
