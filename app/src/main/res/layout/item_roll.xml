@@ -17,44 +17,47 @@
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
+  android:layout_height="@dimen/item_roll_height"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:padding="@dimen/half_control_spacing">
 
   <ImageView
     android:id="@+id/die_1"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
     android:layout_margin="@dimen/half_content_spacing"
     android:contentDescription="@string/die_1"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/die_2"/>
+    app:layout_constraintEnd_toStartOf="@id/die_2"
+    app:layout_constraintDimensionRatio="1:1"
+    app:layout_constraintHorizontal_chainStyle="packed"/>
 
   <ImageView
     android:id="@+id/die_2"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
     android:layout_margin="@dimen/half_content_spacing"
     android:contentDescription="@string/die_2"
     app:layout_constraintStart_toEndOf="@id/die_1"
-    app:layout_constraintTop_toTopOf="@id/die_1"
-    app:layout_constraintBottom_toBottomOf="@id/die_1"
-    app:layout_constraintEnd_toStartOf="@id/value"/>
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/value"
+    app:layout_constraintDimensionRatio="1:1"/>
 
   <TextView
     android:id="@+id/value"
-    android:layout_width="80dp"
+    android:layout_width="@dimen/roll_value_width"
     android:layout_height="0dp"
     android:layout_margin="@dimen/half_content_spacing"
     android:includeFontPadding="false"
     android:autoSizeTextType="uniform"
     android:textAlignment="textEnd"
     app:layout_constraintStart_toEndOf="@id/die_2"
-    app:layout_constraintTop_toTopOf="@id/die_1"
-    app:layout_constraintBottom_toBottomOf="@id/die_2"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     tools:text="7"/>
 
