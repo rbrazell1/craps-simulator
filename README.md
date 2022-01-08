@@ -4,7 +4,7 @@ A simple Android app that uses the Monte Carlo method to estimate the probabilit
 
 ## Credits, copyrights, and license information
 
-The implementation code and build scripts were written by Nicholas Bennett. &copy; 2021 CNM Ingenuity, Inc.
+The implementation code and build scripts were written by Nicholas Bennett. &copy; 2022 CNM Ingenuity, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
