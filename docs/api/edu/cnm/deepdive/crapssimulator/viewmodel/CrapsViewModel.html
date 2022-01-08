@@ -217,12 +217,12 @@ implements <a href="https://developer.android.com/reference/androidx/lifecycle/D
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onStart(androidx.lifecycle.LifecycleOwner)">onStart</a></span>&#8203;(<a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">LifecycleOwner</a>&nbsp;owner)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onPause(androidx.lifecycle.LifecycleOwner)">onPause</a></span>&#8203;(<a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">LifecycleOwner</a>&nbsp;owner)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onStop(androidx.lifecycle.LifecycleOwner)">onStop</a></span>&#8203;(<a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">LifecycleOwner</a>&nbsp;owner)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onResume(androidx.lifecycle.LifecycleOwner)">onResume</a></span>&#8203;(<a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">LifecycleOwner</a>&nbsp;owner)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -281,7 +281,7 @@ implements <a href="https://developer.android.com/reference/androidx/lifecycle/D
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;androidx.lifecycle.<a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">DefaultLifecycleObserver</a></h3>
-<code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onCreate(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onCreate</a>, <a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onDestroy(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onDestroy</a>, <a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onPause(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onPause</a>, <a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onResume(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onResume</a></code></li>
+<code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onCreate(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onCreate</a>, <a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onDestroy(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onDestroy</a>, <a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onStart(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onStart</a>, <a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onStop(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onStop</a></code></li>
 </ul>
 </li>
 </ul>
@@ -409,31 +409,31 @@ implements <a href="https://developer.android.com/reference/androidx/lifecycle/D
 <div class="block">Resets the simulation, publishing an empty snapshot representing the initial simulation state.</div>
 </li>
 </ul>
-<a id="onStart(androidx.lifecycle.LifecycleOwner)">
+<a id="onResume(androidx.lifecycle.LifecycleOwner)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>onStart</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;onStart&#8203;(<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html?is-external=true" title="class or interface in androidx.annotation" class="externalLink">@NonNull</a>
-                    <a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">LifecycleOwner</a>&nbsp;owner)</pre>
+<h4>onResume</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;onResume&#8203;(<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html?is-external=true" title="class or interface in androidx.annotation" class="externalLink">@NonNull</a>
+                     <a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">LifecycleOwner</a>&nbsp;owner)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onStart(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onStart</a></code>&nbsp;in interface&nbsp;<code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">DefaultLifecycleObserver</a></code></dd>
+<dd><code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onResume(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onResume</a></code>&nbsp;in interface&nbsp;<code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">DefaultLifecycleObserver</a></code></dd>
 </dl>
 </li>
 </ul>
-<a id="onStop(androidx.lifecycle.LifecycleOwner)">
+<a id="onPause(androidx.lifecycle.LifecycleOwner)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>onStop</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;onStop&#8203;(<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html?is-external=true" title="class or interface in androidx.annotation" class="externalLink">@NonNull</a>
-                   <a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">LifecycleOwner</a>&nbsp;owner)</pre>
+<h4>onPause</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;onPause&#8203;(<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html?is-external=true" title="class or interface in androidx.annotation" class="externalLink">@NonNull</a>
+                    <a href="https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">LifecycleOwner</a>&nbsp;owner)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onStop(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onStop</a></code>&nbsp;in interface&nbsp;<code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">DefaultLifecycleObserver</a></code></dd>
+<dd><code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true#onPause(androidx.lifecycle.LifecycleOwner)" title="class or interface in androidx.lifecycle" class="externalLink">onPause</a></code>&nbsp;in interface&nbsp;<code><a href="https://developer.android.com/reference/androidx/lifecycle/DefaultLifecycleObserver.html?is-external=true" title="class or interface in androidx.lifecycle" class="externalLink">DefaultLifecycleObserver</a></code></dd>
 </dl>
 </li>
 </ul>
