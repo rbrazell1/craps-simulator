@@ -1,4 +1,9 @@
-This app rapidly simulates thousands (or millions, or even more) of rounds of the shooter's play in the game of Craps. No wagering actions are presented or evaluated; the wins and losses are simply tallied and presented.   
+This app is a simple Monte Carlo simulation of rounds of the shooter's play in the game of Craps. No wagering actions are presented or evaluated; the wins, losses, and winning percentage are simply tallied and presented, along with a snapshot of the most recent round of dice rolls.
+
+### Additional information
+
+* ["Craps", _Wikipedia_](https://en.wikipedia.org/wiki/Craps).
+* ["Monte Carlo method", _Wikipedia_](https://en.wikipedia.org/wiki/Monte_Carlo_method)
 
 ## Credits, copyrights, licenses
 
