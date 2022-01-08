@@ -133,6 +133,7 @@ public class CrapsFragment extends Fragment {
     actions.put(R.id.action_pause, viewModel::stop);
     actions.put(R.id.action_reset, viewModel::reset);
     actions.put(R.id.action_settings, this::openSettings);
+    actions.put(R.id.action_about, this::openLicenseInfo);
   }
 
   private void setRunning(boolean running) {
@@ -145,6 +146,12 @@ public class CrapsFragment extends Fragment {
     Navigation
         .findNavController(binding.getRoot())
         .navigate(CrapsFragmentDirections.openSettings());
+  }
+
+  private void openLicenseInfo() {
+    Navigation
+        .findNavController(binding.getRoot())
+        .navigate(CrapsFragmentDirections.openLicense());
   }
 
 }

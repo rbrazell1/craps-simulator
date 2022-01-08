@@ -30,4 +30,6 @@
   <color name="win_color">#2000FF40</color>
   <color name="loss_color">#20880E4F</color>
 
+  <color name="ic_craps_simulator_launcher_background">@color/secondary_dark_variant</color>
+
 </resources>
