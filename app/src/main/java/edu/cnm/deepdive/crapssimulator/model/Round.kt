@@ -24,7 +24,9 @@ import java.util.*
  */
 class Round(private val rng: Random) {
 
-    private val rolls: MutableList<Roll> = LinkedList()
+    private val _rolls: MutableList<Roll> = LinkedList()
+    val rolls: MutableList<Roll>
+        get() = Collections.unmodifiableList(_rolls)
 
     /**
      * Returns the current [State] of this instance.
@@ -50,7 +52,7 @@ class Round(private val rng: Random) {
      * @return Flag indicating whether this instance has completed with a win.
      */
     fun play(): Boolean {
-        rolls.clear()
+        _rolls.clear()
         state = State.initial()
         win = false
         var point = 0
@@ -64,19 +66,10 @@ class Round(private val rng: Random) {
                 }
                 firstRoll = false
             }
-            rolls.add(roll)
+            _rolls.add(roll)
         } while (!state.isTerminal)
         win = state === State.WIN
         return win
-    }
-
-    /**
-     * Returns a copy of the [List&amp;lt;Roll&amp;gt;][List] rolled so far in this instance.
-     *
-     * @return [List&amp;lt;Roll&amp;gt;][List]
-     */
-    fun getRolls(): List<Roll> {
-        return Collections.unmodifiableList(rolls)
     }
 
     /**
@@ -87,7 +80,7 @@ class Round(private val rng: Random) {
         COME_OUT {
             override val isTerminal = false
 
-            override fun next(roll: Roll, ignoredPoint: Int): State {
+            override fun next(roll: Roll, point: Int): State {
                 return when (roll.value) {
                     2, 3, 12 -> LOSS
                     7, 11 -> WIN
