@@ -101,35 +101,41 @@ class CrapsFragment : Fragment() {
         val resources = resources
         val winQuantity = resources.getQuantityString(R.plurals.win_quantity, wins.toInt())
         val roundQuantity = resources.getQuantityString(R.plurals.round_quantity, rounds.toInt())
-        binding!!.summary.text = String.format(
-            summaryFormat!!,
-            wins,
-            winQuantity,
-            rounds,
-            roundQuantity,
-            winningPercentage
-        )
         val adapter = SnapshotRollsAdapter(context, snapshot)
-        binding!!.rolls.adapter = adapter
+        binding?.let {
+            it.summary.text = String.format(
+                summaryFormat,
+                wins,
+                winQuantity,
+                rounds,
+                roundQuantity,
+                winningPercentage
+            )
+            it.rolls.adapter = adapter
+        }
     }
 
     private fun showError(throwable: Throwable) {
-        Snackbar
-            .make(
-                binding!!.root, String.format(errorMessageFormat!!, throwable.message),
-                Snackbar.LENGTH_LONG
-            )
-            .show()
+        binding?.let {
+            Snackbar
+                .make(
+                    it.root, String.format(errorMessageFormat, throwable.message),
+                    Snackbar.LENGTH_LONG
+                )
+                .show()
+        }
     }
 
     private fun buildMenuActionsMap() {
-        actions.clear()
-        actions[R.id.action_play_once] = Runnable { viewModel!!.runOnce() }
-        actions[R.id.action_play_fast] = Runnable { viewModel!!.runFast() }
-        actions[R.id.action_pause] = Runnable { viewModel!!.stop() }
-        actions[R.id.action_reset] = Runnable { viewModel!!.reset() }
-        actions[R.id.action_settings] = Runnable { openSettings() }
-        actions[R.id.action_about] = Runnable { openAbout() }
+        with(actions) {
+            clear()
+            put(R.id.action_play_once) { viewModel.runOnce() }
+            put(R.id.action_play_fast) { viewModel.runFast() }
+            put(R.id.action_pause) { viewModel.stop() }
+            put(R.id.action_reset) { viewModel.reset() }
+            put(R.id.action_settings) { openSettings() }
+            put(R.id.action_about) { openAbout() }
+        }
     }
 
     private fun setRunning(running: Boolean) {
@@ -138,14 +144,18 @@ class CrapsFragment : Fragment() {
     }
 
     private fun openSettings() {
-        Navigation
-            .findNavController(binding!!.root)
-            .navigate(CrapsFragmentDirections.openSettings())
+        binding?.let {
+            Navigation
+                .findNavController(it.root)
+                .navigate(CrapsFragmentDirections.openSettings())
+        }
     }
 
     private fun openAbout() {
-        Navigation
-            .findNavController(binding!!.root)
-            .navigate(CrapsFragmentDirections.openAbout())
+        binding?.let {
+            Navigation
+                .findNavController(it.root)
+                .navigate(CrapsFragmentDirections.openAbout())
+        }
     }
 }
