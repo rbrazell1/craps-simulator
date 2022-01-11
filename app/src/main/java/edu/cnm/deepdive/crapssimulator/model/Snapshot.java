@@ -59,7 +59,7 @@ public final class Snapshot {
     this.wins = wins;
     this.losses = losses;
     state = round.getState();
-    win = round.isWin();
+    win = round.getWin();
   }
 
   /**
